@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bloom</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =========================
+             CABEÇALHO
+        ========================== -->
+
+        <header class="cabecalho">
+
+            <div class="decoracao-topo">
+                ✿　♡　✿
+            </div>
+
+            <h1>Bloom</h1>
+
+            <p>um cantinho para ouvir música</p>
+
+        </header>
+
+
+        <!-- =========================
+             PLAYER
+        ========================== -->
+
+        <main class="player">
+
+            <!-- Música atual -->
+
+            <section class="musica-atual">
+
+                <div class="capa" id="capa">
+
+                    <div class="flor-capa">
+                        ✿
+                    </div>
+
+                </div>
+
+
+                <div class="informacoes">
+
+                    <span class="pequeno-titulo">
+                        tocando agora
+                    </span>
+
+                    <h2 id="tituloMusica">
+                        Bloom
+                    </h2>
+
+                    <p id="nomeArquivo">
+                        escolha uma música para começar
+                    </p>
+
+                </div>
+
+
+                <!-- Favorito -->
+
+                <button
+                    class="favorito"
+                    id="btnFavorito"
+                    title="Favoritar"
+                    aria-label="Favoritar música"
+                >
+                    ♡
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 PROGRESSO
+            ========================== -->
+
+            <section class="progresso">
+
+                <span id="tempoAtual">
+                    0:00
+                </span>
+
+
+                <div
+                    class="linha-progresso"
+                    id="barraProgresso"
+                >
+
+                    <div
+                        class="progresso-preenchido"
+                        id="progressoPreenchido"
+                    ></div>
+
+                </div>
+
+
+                <span id="duracao">
+                    0:00
+                </span>
+
+            </section>
+
+
+            <!-- =========================
+                 CONTROLES PRINCIPAIS
+            ========================== -->
+
+            <section class="controles-principais">
+
+                <!-- ANTERIOR -->
+
+                <button
+                    class="controle"
+                    id="btnAnterior"
+                    title="Faixa anterior"
+                    aria-label="Faixa anterior"
+                >
+
+                    <div class="icone floral-butterfly">
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                </button>
+
+
+                <!-- VOLTAR -->
+
+                <button
+                    class="controle"
+                    id="btnVoltar"
+                    title="Voltar"
+                    aria-label="Voltar 10 segundos"
+                >
+
+                    <div class="icone flor-voltar">
+
+                        <span class="petala p1"></span>
+                        <span class="petala p2"></span>
+                        <span class="petala p3"></span>
+                        <span class="petala p4"></span>
+
+                        <div class="miolo"></div>
+
+                    </div>
+
+                </button>
+
+
+                <!-- PLAY -->
+
+                <button
+                    class="controle controle-play"
+                    id="btnPlay"
+                    title="Reproduzir"
+                    aria-label="Reproduzir"
+                >
+
+                    <div class="icone flor-play">
+
+                        <span class="petala p1"></span>
+                        <span class="petala p2"></span>
+                        <span class="petala p3"></span>
+                        <span class="petala p4"></span>
+                        <span class="petala p5"></span>
+
+                        <div class="miolo"></div>
+
+                        <div class="simbolo-play"></div>
+
+                    </div>
+
+                </button>
+
+
+                <!-- PAUSE -->
+
+                <button
+                    class="controle"
+                    id="btnPause"
+                    title="Pausar"
+                    aria-label="Pausar"
+                >
+
+                    <div class="icone tulipas">
+
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </button>
+
+
+                <!-- PRÓXIMA -->
+
+                <button
+                    class="controle"
+                    id="btnProxima"
+                    title="Próxima faixa"
+                    aria-label="Próxima faixa"
+                >
+
+                    <div class="icone butterfly-next">
+
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 CONTROLES SECUNDÁRIOS
+            ========================== -->
+
+            <section class="controles-secundarios">
+
+                <!-- SHUFFLE -->
+
+                <button
+                    class="controle-pequeno"
+                    id="btnShuffle"
+                    title="Aleatório"
+                    aria-label="Modo aleatório"
+                >
+
+                    <div class="icone-pequeno flores">
+                        ✿
+                    </div>
+
+                </button>
+
+
+                <!-- TEMA -->
+
+                <button
+                    class="controle-pequeno"
+                    id="btnTema"
+                    title="Mudar aparência"
+                    aria-label="Mudar aparência"
+                >
+
+                    <div class="icone-pequeno tema-icone">
+                        ✿
+                    </div>
+
+                </button>
+
+
+                <!-- VOLUME -->
+
+                <div class="volume">
+
+                    <div class="icone-volume">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+
+                    <input
+                        type="range"
+                        id="volume"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="0.75"
+                    >
+
+                </div>
+
+
+                <!-- REPETIR -->
+
+                <button
+                    class="controle-pequeno"
+                    id="btnRepeat"
+                    title="Repetir"
+                    aria-label="Repetir"
+                >
+
+                    <div class="icone-pequeno lua">
+                        ☾
+                    </div>
+
+                </button>
+
+
+                <!-- ADICIONAR MÚSICAS -->
+
+                <button
+                    class="controle-pequeno adicionar"
+                    id="btnAdicionar"
+                    title="Adicionar músicas"
+                    aria-label="Adicionar músicas"
+                >
+
+                    <div class="icone-pequeno envelope">
+                        ♡
+                    </div>
+
+                </button>
+
+
+                <input
+                    type="file"
+                    id="inputMusicas"
+                    accept="audio/*"
+                    multiple
+                    hidden
+                >
+
+            </section>
+
+
+            <!-- =========================
+                 PLAYLIST
+            ========================== -->
+
+            <section class="playlist">
+
+                <div class="playlist-cabecalho">
+
+                    <div>
+
+                        <span class="pequeno-titulo">
+                            sua coleção
+                        </span>
+
+                        <h3>
+                            Músicas
+                        </h3>
+
+                    </div>
+
+
+                    <span class="florzinha">
+                        ✿
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="lista-musicas"
+                    id="listaMusicas"
+                >
+
+                    <div
+                        class="playlist-vazia"
+                        id="playlistVazia"
+                    >
+
+                        <span class="flor-vazia">
+                            ✿
+                        </span>
+
+                        <p>
+                            suas músicas aparecerão aqui
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+
+            <span>
+                Bloom
+            </span>
+
+            <span>
+                ♡
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ÁUDIO -->
+
+    <audio id="audio"></audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

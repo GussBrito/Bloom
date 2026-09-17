@@ -1,0 +1,1468 @@
+/* ==========================================
+   BLOOM
+========================================== */
+
+:root {
+
+    --bloom-fundo: #eee8e2;
+
+    --bloom-principal: #73547e;
+
+    --bloom-secundario: #a98bb2;
+
+    --bloom-destaque: #e7b7c8;
+
+    --bloom-painel: #fffdf8;
+
+    --bloom-painel-musica: #faf4f6;
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    min-height: 100%;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    color: var(--bloom-principal);
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            color-mix(
+                in srgb,
+                var(--bloom-secundario) 25%,
+                transparent
+            ),
+            transparent 22%
+        ),
+
+        radial-gradient(
+            circle at 85% 75%,
+            color-mix(
+                in srgb,
+                var(--bloom-destaque) 30%,
+                transparent
+            ),
+            transparent 25%
+        ),
+
+        var(--bloom-fundo);
+
+    transition:
+        background .5s ease,
+        color .5s ease;
+}
+
+
+/* textura */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .18;
+
+    background-image:
+        radial-gradient(
+            rgba(82, 61, 83, .18) .6px,
+            transparent .7px
+        );
+
+    background-size: 7px 7px;
+
+    z-index: 0;
+}
+
+
+/* ==========================================
+   APP
+========================================== */
+
+.app {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: min(1180px, 94vw);
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding:
+        40px 0 25px;
+}
+
+
+/* ==========================================
+   CABEÇALHO
+========================================== */
+
+.cabecalho {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.decoracao-topo {
+
+    margin-bottom: 10px;
+
+    color: var(--bloom-secundario);
+
+    font-size: 18px;
+
+    letter-spacing: 6px;
+
+    opacity: .8;
+
+    transition: color .5s ease;
+}
+
+
+.cabecalho h1 {
+
+    margin: 0;
+
+    color: var(--bloom-principal);
+
+    font-size:
+        clamp(45px, 6vw, 64px);
+
+    font-weight: 400;
+
+    transition: color .5s ease;
+}
+
+
+.cabecalho p {
+
+    margin:
+        10px 0 0;
+
+    color: var(--bloom-secundario);
+
+    font-size: 13px;
+
+    transition: color .5s ease;
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+.player {
+
+    position: relative;
+
+    width: min(980px, 100%);
+
+    margin: auto;
+
+    padding:
+        50px 55px 45px;
+
+    background: var(--bloom-painel);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 14%,
+            transparent
+        );
+
+    border-radius:
+        30px 36px 32px 38px;
+
+    box-shadow:
+        0 22px 50px
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 15%,
+            transparent
+        );
+
+    transform: rotate(-.2deg);
+
+    transition:
+        background .5s ease,
+        border-color .5s ease,
+        box-shadow .5s ease;
+}
+
+
+.player::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 13px;
+
+    border:
+        1px dashed
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 18%,
+            transparent
+        );
+
+    border-radius:
+        22px 28px 24px 30px;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   MÚSICA ATUAL
+========================================== */
+
+.musica-atual {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(790px, 100%);
+
+    margin:
+        0 auto 25px;
+
+    padding: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+        145px 1fr 70px;
+
+    gap: 25px;
+
+    align-items: center;
+
+    background: var(--bloom-painel-musica);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 20%,
+            transparent
+        );
+
+    box-shadow:
+        5px 6px 0
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 14%,
+            transparent
+        );
+
+    transform: rotate(.3deg);
+
+    transition:
+        background .5s ease,
+        border-color .5s ease;
+}
+
+
+/* ==========================================
+   CAPA
+========================================== */
+
+.capa {
+
+    width: 135px;
+
+    height: 135px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius:
+        48% 52% 45% 55%;
+
+    background:
+        linear-gradient(
+            145deg,
+            color-mix(
+                in srgb,
+                var(--bloom-secundario) 35%,
+                white
+            ),
+            color-mix(
+                in srgb,
+                var(--bloom-destaque) 45%,
+                white
+            )
+        );
+
+    border:
+        1px dashed
+        var(--bloom-secundario);
+
+    transform: rotate(-4deg);
+
+    transition: background .5s ease;
+}
+
+
+.flor-capa {
+
+    font-size: 42px;
+
+    color: var(--bloom-secundario);
+}
+
+
+/* ==========================================
+   INFORMAÇÕES
+========================================== */
+
+.pequeno-titulo {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--bloom-secundario);
+
+    font-size: 10px;
+
+    letter-spacing: .15em;
+}
+
+
+.informacoes h2 {
+
+    margin:
+        0 0 8px;
+
+    color: var(--bloom-principal);
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.informacoes p {
+
+    margin: 0;
+
+    color: var(--bloom-secundario);
+
+    font-size: 12px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   FAVORITO
+========================================== */
+
+.favorito {
+
+    width: 62px;
+
+    height: 62px;
+
+    border:
+        1px dashed
+        var(--bloom-destaque);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.4);
+
+    color: var(--bloom-destaque);
+
+    font-size: 29px;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+}
+
+
+.favorito:hover {
+
+    transform:
+        rotate(2deg)
+        scale(1.08);
+}
+
+
+.favorito.ativo {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-destaque) 35%,
+            white
+        );
+
+    color:
+        color-mix(
+            in srgb,
+            var(--bloom-destaque) 80%,
+            #8b536a
+        );
+}
+
+
+/* ==========================================
+   PROGRESSO
+========================================== */
+
+.progresso {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(790px, 100%);
+
+    margin:
+        0 auto 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        38px 1fr 38px;
+
+    gap: 10px;
+
+    align-items: center;
+
+    color: var(--bloom-secundario);
+
+    font-size: 10px;
+}
+
+
+.linha-progresso {
+
+    height: 6px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 25%,
+            white
+        );
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+
+.progresso-preenchido {
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--bloom-secundario),
+            var(--bloom-destaque)
+        );
+
+    transition:
+        width .05s linear;
+}
+
+
+/* ==========================================
+   CONTROLES PRINCIPAIS
+========================================== */
+
+.controles-principais {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(820px, 100%);
+
+    margin:
+        0 auto 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 18px;
+
+    align-items: center;
+}
+
+
+.controle {
+
+    padding: 8px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease;
+}
+
+
+.controle:hover {
+
+    transform:
+        translateY(-5px)
+        rotate(-2deg);
+}
+
+
+.controle:active {
+
+    transform:
+        scale(.92);
+}
+
+
+/* ==========================================
+   ÍCONES TEMPORÁRIOS
+========================================== */
+
+.icone {
+
+    position: relative;
+
+    width: 82px;
+
+    height: 82px;
+
+    margin: auto;
+
+    border:
+        1px dashed
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 38%,
+            transparent
+        );
+
+    border-radius:
+        48% 52% 47% 53%;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 15%,
+            white
+        );
+
+    color: var(--bloom-secundario);
+
+    transition:
+        background .5s ease,
+        border-color .5s ease;
+}
+
+
+/* ==========================================
+   PLAY
+========================================== */
+
+.controle-play .icone {
+
+    width: 105px;
+
+    height: 105px;
+
+    background:
+        radial-gradient(
+            circle,
+            color-mix(
+                in srgb,
+                var(--bloom-destaque) 45%,
+                white
+            ),
+            color-mix(
+                in srgb,
+                var(--bloom-secundario) 35%,
+                white
+            )
+        );
+}
+
+
+.flor-play .petala {
+
+    position: absolute;
+
+    width: 26px;
+
+    height: 34px;
+
+    background: var(--bloom-secundario);
+
+    border-radius:
+        70% 30% 70% 30%;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform-origin:
+        0 0;
+}
+
+
+.flor-play .p1 {
+    transform:
+        translate(-4px,-30px)
+        rotate(0deg);
+}
+
+
+.flor-play .p2 {
+    transform:
+        translate(-4px,-30px)
+        rotate(72deg);
+}
+
+
+.flor-play .p3 {
+    transform:
+        translate(-4px,-30px)
+        rotate(144deg);
+}
+
+
+.flor-play .p4 {
+    transform:
+        translate(-4px,-30px)
+        rotate(216deg);
+}
+
+
+.flor-play .p5 {
+    transform:
+        translate(-4px,-30px)
+        rotate(288deg);
+}
+
+
+.flor-play .miolo {
+
+    position: absolute;
+
+    width: 25px;
+
+    height: 25px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius: 50%;
+
+    background: #f5dfb9;
+}
+
+
+.simbolo-play {
+
+    position: absolute;
+
+    left: 53%;
+
+    top: 50%;
+
+    transform:
+        translate(-35%,-50%);
+
+    width: 0;
+
+    height: 0;
+
+    border-top:
+        9px solid transparent;
+
+    border-bottom:
+        9px solid transparent;
+
+    border-left:
+        14px solid var(--bloom-principal);
+}
+
+
+/* ==========================================
+   BORBOLETAS
+========================================== */
+
+.floral-butterfly::before,
+.floral-butterfly::after,
+.butterfly-next::before,
+.butterfly-next::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+
+    width: 31px;
+
+    height: 45px;
+
+    background:
+        linear-gradient(
+            145deg,
+            color-mix(
+                in srgb,
+                var(--bloom-secundario) 80%,
+                white
+            ),
+            color-mix(
+                in srgb,
+                var(--bloom-destaque) 40%,
+                white
+            )
+        );
+
+    border:
+        1px solid
+        var(--bloom-secundario);
+
+    border-radius:
+        70% 30% 65% 35%;
+}
+
+
+.floral-butterfly::before,
+.butterfly-next::before {
+
+    left: 8px;
+
+    transform:
+        rotate(28deg);
+}
+
+
+.floral-butterfly::after,
+.butterfly-next::after {
+
+    right: 8px;
+
+    transform:
+        scaleX(-1)
+        rotate(28deg);
+}
+
+
+.floral-butterfly span:first-child {
+
+    position: absolute;
+
+    width: 3px;
+
+    height: 45px;
+
+    left: 50%;
+
+    top: 19px;
+
+    background:
+        var(--bloom-principal);
+
+    transform:
+        translateX(-50%);
+
+    z-index: 2;
+}
+
+
+/* ==========================================
+   TULIPAS
+========================================== */
+
+.tulipas::before,
+.tulipas::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 12px;
+
+    width: 22px;
+
+    height: 45px;
+
+    background:
+        linear-gradient(
+            var(--bloom-secundario),
+            color-mix(
+                in srgb,
+                var(--bloom-destaque) 30%,
+                white
+            )
+        );
+
+    border:
+        1px solid
+        var(--bloom-secundario);
+
+    border-radius:
+        50% 50% 35% 35%;
+}
+
+
+.tulipas::before {
+
+    left: 17px;
+
+    transform:
+        rotate(-5deg);
+}
+
+
+.tulipas::after {
+
+    right: 17px;
+
+    transform:
+        rotate(5deg);
+}
+
+
+/* ==========================================
+   CONTROLES SECUNDÁRIOS
+========================================== */
+
+.controles-secundarios {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(720px, 100%);
+
+    margin:
+        0 auto 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        65px 65px 1fr 65px 65px;
+
+    gap: 18px;
+
+    align-items: center;
+}
+
+
+.controle-pequeno {
+
+    width: 65px;
+
+    height: 65px;
+
+    padding: 0;
+
+    border:
+        1px dashed
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 35%,
+            transparent
+        );
+
+    border-radius:
+        45% 55% 52% 48%;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 12%,
+            white
+        );
+
+    color: var(--bloom-secundario);
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+}
+
+
+.controle-pequeno:hover {
+
+    transform:
+        translateY(-3px)
+        rotate(-2deg);
+}
+
+
+.controle-pequeno.ativo {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 25%,
+            white
+        );
+
+    border-color:
+        var(--bloom-secundario);
+}
+
+
+.icone-pequeno {
+
+    width: 60px;
+
+    height: 60px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: var(--bloom-secundario);
+
+    font-size: 28px;
+}
+
+
+/* ==========================================
+   VOLUME
+========================================== */
+
+.volume {
+
+    display: grid;
+
+    grid-template-columns:
+        60px 1fr;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+
+.icone-volume {
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+}
+
+
+.icone-volume span {
+
+    display: block;
+
+    width: 4px;
+
+    border-radius: 10px;
+
+    background:
+        var(--bloom-secundario);
+}
+
+
+.icone-volume span:nth-child(1) {
+    height: 10px;
+}
+
+
+.icone-volume span:nth-child(2) {
+    height: 20px;
+}
+
+
+.icone-volume span:nth-child(3) {
+    height: 14px;
+}
+
+
+input[type="range"] {
+
+    width: 100%;
+
+    accent-color:
+        var(--bloom-secundario);
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   PLAYLIST
+========================================== */
+
+.playlist {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(790px, 100%);
+
+    margin: auto;
+
+    padding:
+        22px 25px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-painel-musica) 85%,
+            transparent
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 20%,
+            transparent
+        );
+
+    border-radius:
+        18px 22px 17px 20px;
+
+    transition:
+        background .5s ease;
+}
+
+
+.playlist-cabecalho {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        1px dashed
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 20%,
+            transparent
+        );
+}
+
+
+.playlist-cabecalho h3 {
+
+    margin: 0;
+
+    color: var(--bloom-principal);
+
+    font-size: 21px;
+
+    font-weight: 400;
+}
+
+
+.florzinha {
+
+    color: var(--bloom-destaque);
+
+    font-size: 27px;
+}
+
+
+/* ==========================================
+   LISTA
+========================================== */
+
+.lista-musicas {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+
+.playlist-vazia {
+
+    min-height: 90px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.flor-vazia {
+
+    color: var(--bloom-secundario);
+
+    font-size: 22px;
+}
+
+
+.playlist-vazia p {
+
+    margin: 5px 0;
+
+    color: var(--bloom-secundario);
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   MÚSICA DA LISTA
+========================================== */
+
+.musica-item {
+
+    display: grid;
+
+    grid-template-columns:
+        45px 1fr 45px;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 65px;
+
+    padding:
+        8px 12px;
+
+    background:
+        rgba(255,255,255,.6);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--bloom-principal) 12%,
+            transparent
+        );
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+}
+
+
+.musica-item:hover {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 12%,
+            white
+        );
+
+    transform:
+        translateX(3px);
+}
+
+
+.musica-item.tocando {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 20%,
+            white
+        );
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--bloom-secundario) 35%,
+            transparent
+        );
+}
+
+
+.musica-mini-capa {
+
+    width: 43px;
+
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(
+                in srgb,
+                var(--bloom-secundario) 45%,
+                white
+            ),
+            color-mix(
+                in srgb,
+                var(--bloom-destaque) 45%,
+                white
+            )
+        );
+
+    color:
+        var(--bloom-principal);
+}
+
+
+.musica-nome {
+
+    overflow: hidden;
+}
+
+
+.musica-nome strong {
+
+    display: block;
+
+    color: var(--bloom-principal);
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.musica-nome small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--bloom-secundario);
+
+    font-size: 9px;
+}
+
+
+.musica-favorito {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--bloom-destaque);
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   RODAPÉ
+========================================== */
+
+footer {
+
+    width: min(980px, 100%);
+
+    margin:
+        17px auto 0;
+
+    padding:
+        0 10px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--bloom-secundario);
+
+    font-size: 10px;
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 760px) {
+
+    .app {
+
+        width: 94vw;
+
+        padding-top: 25px;
+    }
+
+
+    .player {
+
+        padding:
+            40px 18px 30px;
+    }
+
+
+    .musica-atual {
+
+        grid-template-columns:
+            90px 1fr;
+
+        gap: 18px;
+    }
+
+
+    .capa {
+
+        width: 85px;
+
+        height: 85px;
+    }
+
+
+    .favorito {
+
+        display: none;
+    }
+
+
+    .informacoes h2 {
+
+        font-size: 18px;
+    }
+
+
+    .controles-principais {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .controles-secundarios {
+
+        grid-template-columns:
+            55px 55px 1fr 55px 55px;
+
+        gap: 6px;
+    }
+
+
+    .controle-pequeno {
+
+        width: 55px;
+
+        height: 55px;
+    }
+
+
+    .icone {
+
+        width: 68px;
+
+        height: 68px;
+    }
+
+
+    .controle-play .icone {
+
+        width: 85px;
+
+        height: 85px;
+    }
+
+}
