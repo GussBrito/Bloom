@@ -20,9 +20,6 @@ const btnAdicionar =
 const btnPlay =
     document.getElementById("btnPlay");
 
-const btnPause =
-    document.getElementById("btnPause");
-
 const btnAnterior =
     document.getElementById("btnAnterior");
 
@@ -71,13 +68,6 @@ const listaMusicas =
 const playlistVazia =
     document.getElementById("playlistVazia");
 
-/* BOTOES DE FAVICONS (CANTOS) */
-const faviconTopLeft = document.querySelector('.favicon-btn.top-left');
-const faviconTopRight = document.querySelector('.favicon-btn.top-right');
-const faviconBottomLeft = document.querySelector('.favicon-btn.bottom-left');
-const faviconBottomRight = document.querySelector('.favicon-btn.bottom-right');
-
-
 /* ==========================================
    ESTADO
 ========================================== */
@@ -102,51 +92,51 @@ const temas = [
     {
         nome: "lavanda",
 
-        fundo: "#eee8e2",
+        fundo: "#f7f0fa",
 
-        principal: "#73547e",
+        principal: "#5d3967",
 
-        secundario: "#a98bb2",
+        secundario: "#b07eb7",
 
-        destaque: "#e7b7c8",
+        destaque: "#f1bfd4",
 
-        painel: "#fffdf8",
+        painel: "#fffafc",
 
-        painelMusica: "#faf4f6"
+        painelMusica: "#f7edf8"
     },
 
 
     {
         nome: "rose",
 
-        fundo: "#f1e6e4",
+        fundo: "#fbe8e9",
 
-        principal: "#895c70",
+        principal: "#7e415c",
 
-        secundario: "#c98fa8",
+        secundario: "#d58aa1",
 
-        destaque: "#e8b8c8",
+        destaque: "#f6c6d8",
 
-        painel: "#fffaf8",
+        painel: "#fff9f9",
 
-        painelMusica: "#fdf0f3"
+        painelMusica: "#fdf0f2"
     },
 
 
     {
         nome: "sage",
 
-        fundo: "#e9e9df",
+        fundo: "#edf5eb",
 
-        principal: "#687b67",
+        principal: "#2f4c3d",
 
-        secundario: "#91a58d",
+        secundario: "#7ca77b",
 
-        destaque: "#c7d4b9",
+        destaque: "#dfe9a3",
 
-        painel: "#fffdf7",
+        painel: "#f8fff7",
 
-        painelMusica: "#f3f5ec"
+        painelMusica: "#eef5eb"
     }
 
 ];
@@ -229,6 +219,18 @@ btnTema.addEventListener(
 ========================================== */
 
 audio.volume = 0.75;
+
+function atualizarEstadoPlayback() {
+    const estaTocando = !audio.paused && !audio.ended && musicas.length > 0;
+    btnPlay.classList.toggle("is-playing", estaTocando);
+    btnPlay.setAttribute("aria-label", estaTocando ? "Pausar música" : "Reproduzir música");
+    btnPlay.title = estaTocando ? "Pausar" : "Reproduzir";
+}
+
+function atualizarEstadoVisualPlay() {
+    const estaTocando = !audio.paused && !audio.ended && musicas.length > 0;
+    btnPlay.classList.toggle("is-playing", estaTocando);
+}
 
 
 /* ==========================================
@@ -409,7 +411,13 @@ function carregarMusica(
 
 btnPlay.addEventListener(
     "click",
-    reproduzir
+    () => {
+        if (audio.paused || audio.ended) {
+            reproduzir();
+        } else {
+            pausar();
+        }
+    }
 );
 
 
@@ -437,6 +445,9 @@ function reproduzir() {
 
     audio
         .play()
+        .then(() => {
+            atualizarEstadoPlayback();
+        })
         .catch(
             erro => {
 
@@ -455,15 +466,10 @@ function reproduzir() {
    PAUSE
 ========================================== */
 
-btnPause.addEventListener(
-    "click",
-    pausar
-);
-
-
 function pausar() {
 
     audio.pause();
+    atualizarEstadoPlayback();
 
 }
 
@@ -711,8 +717,8 @@ function atualizarFavorito() {
         )
     ) {
 
-        btnFavorito.textContent =
-            "♥";
+        btnFavorito.innerHTML =
+            '<img src="favicons/favoritar.png" alt="Favoritado" aria-hidden="true">';
 
         btnFavorito.classList.add(
             "ativo"
@@ -720,8 +726,8 @@ function atualizarFavorito() {
 
     } else {
 
-        btnFavorito.textContent =
-            "♡";
+        btnFavorito.innerHTML =
+            '<img src="favicons/favoritar.png" alt="Favoritar" aria-hidden="true" style="filter: grayscale(1) brightness(0.9); opacity: 0.7;">';
 
         btnFavorito.classList.remove(
             "ativo"
@@ -757,6 +763,22 @@ audio.addEventListener(
     "timeupdate",
     atualizarProgresso
 );
+
+audio.addEventListener("play", () => {
+    atualizarEstadoPlayback();
+    atualizarEstadoVisualPlay();
+});
+audio.addEventListener("pause", () => {
+    atualizarEstadoPlayback();
+    atualizarEstadoVisualPlay();
+});
+audio.addEventListener("ended", () => {
+    atualizarEstadoPlayback();
+    atualizarEstadoVisualPlay();
+});
+
+atualizarEstadoPlayback();
+atualizarEstadoVisualPlay();
 
 
 function atualizarProgresso() {
@@ -969,8 +991,7 @@ function renderizarPlaylist() {
                 "musica-mini-capa";
 
 
-            // usar imagem ilustrada como mini-capa (placeholder: favicons/playlist.png)
-            capa.innerHTML = '<img src="favicons/playlist.png" alt="Capa" class="mini-capa-img">';
+            capa.innerHTML = '<div class="mini-capa-emoji">✿</div>';
 
 
             const informacoes =
@@ -1162,8 +1183,3 @@ aplicarTema();
 
 renderizarPlaylist();
 
-/* Conectar botões dos cantos às ações do player */
-if (faviconTopLeft) faviconTopLeft.addEventListener('click', musicaAnterior);
-if (faviconTopRight) faviconTopRight.addEventListener('click', musicaProxima);
-if (faviconBottomLeft) faviconBottomLeft.addEventListener('click', () => { btnShuffle.click(); });
-if (faviconBottomRight) faviconBottomRight.addEventListener('click', () => { btnRepeat.click(); });

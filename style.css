@@ -1,7 +1,3 @@
-/* ==========================================
-   BLOOM
-========================================== */
-
 :root {
 
     --bloom-fundo: #eee8e2;
@@ -128,11 +124,44 @@ body::before {
 
 .cabecalho {
 
+    position: relative;
     text-align: center;
-
     margin-bottom: 30px;
 }
 
+.cabecalho-topo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.theme-toggle {
+    width: 46px;
+    height: 46px;
+    border: 1px solid color-mix(in srgb, var(--bloom-principal) 22%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bloom-painel) 90%, transparent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 20px color-mix(in srgb, var(--bloom-principal) 10%, transparent);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px color-mix(in srgb, var(--bloom-principal) 14%, transparent);
+}
+
+.theme-toggle .tema-img {
+    width: 42px !important;
+    height: 42px !important;
+    object-fit: contain !important;
+    border-radius: 8px;
+    display: block;
+}
 
 .decoracao-topo {
 
@@ -409,18 +438,13 @@ body::before {
 
 .favorito {
 
-    width: 62px;
+    width: 56px;
 
-    height: 62px;
+    height: 56px;
 
-    border:
-        1px dashed
-        var(--bloom-destaque);
+    border: none;
 
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.4);
+    background: transparent;
 
     color: var(--bloom-destaque);
 
@@ -450,12 +474,22 @@ body::before {
             white
         );
 
+    box-shadow:
+        0 0 0 4px color-mix(in srgb, var(--bloom-destaque) 22%, white);
+
     color:
         color-mix(
             in srgb,
             var(--bloom-destaque) 80%,
             #8b536a
         );
+}
+
+.favorito img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 
@@ -530,75 +564,45 @@ body::before {
    FAVICONS NOS CANTOS
 ========================================== */
 
-.favicons-cantos {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-}
-
-.favicon-btn {
-    pointer-events: auto;
-    position: fixed;
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--bloom-painel) 85%, transparent);
-    border: 1px solid color-mix(in srgb, var(--bloom-principal) 12%, transparent);
-    box-shadow: 0 6px 18px color-mix(in srgb, var(--bloom-principal) 12%, transparent);
-    z-index: 60;
-    cursor: pointer;
-    padding: 4px;
-    transition: transform .18s ease, box-shadow .18s ease;
-}
-
-.favicon-btn img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.favicon-btn:hover {
-    transform: scale(1.06) translateY(-3px);
-    box-shadow: 0 10px 26px color-mix(in srgb, var(--bloom-principal) 18%, transparent);
-}
-
-.top-left { top: 16px; left: 16px; }
-.top-right { top: 16px; right: 16px; }
-.bottom-left { bottom: 16px; left: 16px; }
-.bottom-right { bottom: 16px; right: 16px; }
-
-/* tema - imagem do botão */
-.tema-img {
-    width: 22px;
-    height: 22px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-}
+/* elementos decorativos dos cantos removidos */
 
 /* ícones ilustrados - centralizar e substituir elementos decorativos */
 .icone img,
 .icone-pequeno img,
-.icone-volume img,
 .playlist-icon,
 .control-img {
     display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    max-width: 86%;
-    max-height: 86%;
+    position: static;
+    transform: none;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
 }
 
+.icone-volume {
+    position: relative;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 4px;
+    height: 30px;
+    width: 100%;
+}
+
+.icone-volume span {
+    display: block;
+    width: 4px;
+    border-radius: 10px;
+    background: var(--bloom-secundario);
+}
+
+.icone-volume span:nth-child(1) { height: 10px; }
+.icone-volume span:nth-child(2) { height: 18px; }
+.icone-volume span:nth-child(3) { height: 12px; }
+
 .small-icon {
-    width: 22px;
-    height: 22px;
+    width: 44px;
+    height: 44px;
     display: block;
     object-fit: contain;
 }
@@ -622,11 +626,45 @@ body::before {
 .icone-pequeno {
     font-size: 0;
     line-height: 0;
+    position: relative;
+}
+
+.adicionar-plus {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--bloom-principal);
+    line-height: 1;
+}
+
+.adicionar .icone-pequeno {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.adicionar .small-icon {
+    width: 38px !important;
+    height: 38px !important;
+    display: block;
+    object-fit: contain;
 }
 
 .favorito {
     font-size: 0;
     padding: 6px;
+}
+
+.favorito img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .favorito .small-icon {
@@ -652,6 +690,18 @@ body::before {
     display: block;
 }
 
+.mini-capa-emoji {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--bloom-secundario) 45%, white), color-mix(in srgb, var(--bloom-destaque) 45%, white));
+    color: var(--bloom-principal);
+    font-size: 18px;
+}
+
 
 /* ==========================================
    CONTROLES PRINCIPAIS
@@ -663,25 +713,21 @@ body::before {
 
     z-index: 2;
 
-    width: min(820px, 100%);
+    width: min(560px, 100%);
 
     margin:
         0 auto 28px;
 
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, 1fr);
-
-    gap: 18px;
-
+    display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 56px;
 }
 
 
 .controle {
 
-    padding: 8px;
+    padding: 0;
 
     border: none;
 
@@ -717,35 +763,26 @@ body::before {
 
     position: relative;
 
-    width: 82px;
+    width: auto;
 
-    height: 82px;
+    height: auto;
 
-    margin: auto;
+    margin: 0;
 
-    border:
-        1px dashed
-        color-mix(
-            in srgb,
-            var(--bloom-principal) 38%,
-            transparent
-        );
+    border: none;
 
-    border-radius:
-        48% 52% 47% 53%;
-
-    background:
-        color-mix(
-            in srgb,
-            var(--bloom-secundario) 15%,
-            white
-        );
+    background: transparent;
 
     color: var(--bloom-secundario);
 
-    transition:
-        background .5s ease,
-        border-color .5s ease;
+    transition: none;
+}
+
+.control-img {
+    width: 96px;
+    height: 96px;
+    display: block;
+    object-fit: contain;
 }
 
 
@@ -753,28 +790,82 @@ body::before {
    PLAY
 ========================================== */
 
-.controle-play .icone {
-
-    width: 105px;
-
-    height: 105px;
-
-    background:
-        radial-gradient(
-            circle,
-            color-mix(
-                in srgb,
-                var(--bloom-destaque) 45%,
-                white
-            ),
-            color-mix(
-                in srgb,
-                var(--bloom-secundario) 35%,
-                white
-            )
-        );
+.controle-play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.controle-play .icone {
+    width: 105px;
+    height: 105px;
+    background: transparent;
+}
+
+.play-visual {
+    position: relative;
+    width: 108px;
+    height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+    transition: all .25s ease;
+}
+
+.flor-aberta,
+.continuidade {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.flor-aberta {
+    font-size: 42px;
+    color: var(--bloom-secundario);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.continuidade {
+    opacity: 0;
+    transform: scale(.8);
+    gap: 12px;
+}
+
+.continuidade-botao {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bloom-principal), var(--bloom-secundario));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--bloom-destaque) 22%, transparent);
+    position: relative;
+}
+
+.continuidade-botao::before,
+.continuidade-botao::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.28);
+}
+
+.controle-play.is-playing .flor-aberta {
+    opacity: 0;
+    transform: scale(.7);
+}
+
+.controle-play.is-playing .continuidade {
+    opacity: 1;
+    transform: scale(1);
+}
 
 .flor-play .petala {
 
@@ -884,85 +975,19 @@ body::before {
    BORBOLETAS
 ========================================== */
 
+.floral-butterfly,
+.butterfly-next {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
 .floral-butterfly::before,
 .floral-butterfly::after,
 .butterfly-next::before,
-.butterfly-next::after {
-
-    content: "";
-
-    position: absolute;
-
-    top: 20px;
-
-    width: 31px;
-
-    height: 45px;
-
-    background:
-        linear-gradient(
-            145deg,
-            color-mix(
-                in srgb,
-                var(--bloom-secundario) 80%,
-                white
-            ),
-            color-mix(
-                in srgb,
-                var(--bloom-destaque) 40%,
-                white
-            )
-        );
-
-    border:
-        1px solid
-        var(--bloom-secundario);
-
-    border-radius:
-        70% 30% 65% 35%;
-}
-
-
-.floral-butterfly::before,
-.butterfly-next::before {
-
-    left: 8px;
-
-    transform:
-        rotate(28deg);
-}
-
-
-.floral-butterfly::after,
-.butterfly-next::after {
-
-    right: 8px;
-
-    transform:
-        scaleX(-1)
-        rotate(28deg);
-}
-
-
+.butterfly-next::after,
 .floral-butterfly span:first-child {
-
-    position: absolute;
-
-    width: 3px;
-
-    height: 45px;
-
-    left: 50%;
-
-    top: 19px;
-
-    background:
-        var(--bloom-principal);
-
-    transform:
-        translateX(-50%);
-
-    z-index: 2;
+    display: none !important;
 }
 
 
@@ -1038,7 +1063,7 @@ body::before {
     display: grid;
 
     grid-template-columns:
-        65px 65px 1fr 65px 65px;
+        65px 1fr 65px 65px 65px;
 
     gap: 18px;
 
@@ -1048,19 +1073,13 @@ body::before {
 
 .controle-pequeno {
 
-    width: 65px;
+    width: 62px;
 
-    height: 65px;
+    height: 62px;
 
     padding: 0;
 
-    border:
-        1px dashed
-        color-mix(
-            in srgb,
-            var(--bloom-principal) 35%,
-            transparent
-        );
+    border: 1px solid color-mix(in srgb, var(--bloom-principal) 12%, transparent);
 
     border-radius:
         45% 55% 52% 48%;
@@ -1105,9 +1124,9 @@ body::before {
 
 .icone-pequeno {
 
-    width: 60px;
+    width: auto;
 
-    height: 60px;
+    height: auto;
 
     margin: auto;
 
@@ -1120,6 +1139,13 @@ body::before {
     color: var(--bloom-secundario);
 
     font-size: 28px;
+}
+
+.icone-pequeno img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    display: block;
 }
 
 
@@ -1137,48 +1163,6 @@ body::before {
     gap: 12px;
 
     align-items: center;
-}
-
-
-.icone-volume {
-
-    height: 30px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 3px;
-}
-
-
-.icone-volume span {
-
-    display: block;
-
-    width: 4px;
-
-    border-radius: 10px;
-
-    background:
-        var(--bloom-secundario);
-}
-
-
-.icone-volume span:nth-child(1) {
-    height: 10px;
-}
-
-
-.icone-volume span:nth-child(2) {
-    height: 20px;
-}
-
-
-.icone-volume span:nth-child(3) {
-    height: 14px;
 }
 
 

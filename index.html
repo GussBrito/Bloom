@@ -24,6 +24,18 @@
 
         <header class="cabecalho">
 
+            <div class="cabecalho-topo">
+                <button
+                    class="theme-toggle"
+                    id="btnTema"
+                    type="button"
+                    title="Mudar paleta"
+                    aria-label="Mudar paleta"
+                >
+                    <img src="favicons/cores.png" alt="Mudar paleta" class="tema-img" style="width: 42px; height: 42px; object-fit: contain;">
+                </button>
+            </div>
+
             <div class="decoracao-topo">
                 ✿　♡　✿
             </div>
@@ -79,7 +91,7 @@
                     title="Favoritar"
                     aria-label="Favoritar música"
                 >
-                    <img class="small-icon" src="favicons/favoritar.jpeg" alt="Favoritar">
+                    <img class="small-icon" src="favicons/favoritar.png" alt="Favoritar">
                 </button>
 
             </section>
@@ -122,71 +134,31 @@
 
             <section class="controles-principais">
 
-                <!-- ANTERIOR -->
-
                 <button
                     class="controle"
                     id="btnAnterior"
                     title="Faixa anterior"
                     aria-label="Faixa anterior"
                 >
-
                     <div class="icone floral-butterfly">
-                        <img class="control-img" src="favicons/prev song.jpeg" alt="Anterior">
+                        <img class="control-img" src="favicons/prev song.png" alt="Anterior">
                     </div>
-
                 </button>
-
-
-                <!-- VOLTAR -->
-
-                <button
-                    class="controle"
-                    id="btnVoltar"
-                    title="Voltar"
-                    aria-label="Voltar 10 segundos"
-                >
-
-                    <div class="icone flor-voltar">
-                        <img class="control-img" src="favicons/rewind.png" alt="Retroceder">
-                    </div>
-
-                </button>
-
-
-                <!-- PLAY -->
 
                 <button
                     class="controle controle-play"
                     id="btnPlay"
-                    title="Reproduzir"
-                    aria-label="Reproduzir"
+                    title="Reproduzir ou pausar"
+                    aria-label="Reproduzir ou pausar"
                 >
-
-                    <div class="icone flor-play">
-                        <img class="control-img" src="favicons/play.png" alt="Reproduzir">
+                    <div class="play-visual" aria-hidden="true">
+                        <span class="flor-aberta">✿</span>
+                        <span class="continuidade">
+                            <span class="continuidade-botao"></span>
+                            <span class="continuidade-botao"></span>
+                        </span>
                     </div>
-
                 </button>
-
-
-                <!-- PAUSE -->
-
-                <button
-                    class="controle"
-                    id="btnPause"
-                    title="Pausar"
-                    aria-label="Pausar"
-                >
-
-                    <div class="icone tulipas">
-                        <img class="control-img" src="favicons/pause.jpeg" alt="Pausar">
-                    </div>
-
-                </button>
-
-
-                <!-- PRÓXIMA -->
 
                 <button
                     class="controle"
@@ -194,11 +166,9 @@
                     title="Próxima faixa"
                     aria-label="Próxima faixa"
                 >
-
                     <div class="icone butterfly-next">
-                        <img class="control-img" src="favicons/next song.jpeg" alt="Próxima">
+                        <img class="control-img" src="favicons/next song.png" alt="Próxima">
                     </div>
-
                 </button>
 
             </section>
@@ -220,21 +190,8 @@
                 >
 
                     <div class="icone-pequeno flores">
-                        <img class="small-icon" src="favicons/shuffle.jpeg" alt="Aleatório">
+                        <img class="small-icon" src="favicons/shuffle.png" alt="Aleatório">
                     </div>
-
-                </button>
-
-
-                <!-- TEMA -->
-
-                <button
-                    class="controle-pequeno"
-                    id="btnTema"
-                    title="Mudar aparência"
-                    aria-label="Mudar aparência"
-                >
-                    <img src="favicons/WhatsApp Image 2026-09-17 at 08.06.46.jpeg" alt="Tema" class="tema-img">
 
                 </button>
 
@@ -243,10 +200,11 @@
 
                 <div class="volume">
 
-                    <div class="icone-volume">
-                        <img class="small-icon" src="favicons/volume.png" alt="Volume">
+                    <div class="icone-volume" aria-label="Volume" title="Volume">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-
 
                     <input
                         type="range"
@@ -259,6 +217,16 @@
 
                 </div>
 
+                <button
+                    class="controle-pequeno"
+                    id="btnVoltar"
+                    title="Voltar 10 segundos"
+                    aria-label="Voltar 10 segundos"
+                >
+                    <div class="icone-pequeno flor-voltar">
+                        <img class="small-icon" src="favicons/prev song.png" alt="Voltar 10 segundos">
+                    </div>
+                </button>
 
                 <!-- REPETIR -->
 
@@ -270,7 +238,7 @@
                 >
 
                     <div class="icone-pequeno lua">
-                        <img class="small-icon" src="favicons/repeat.jpeg" alt="Repetir">
+                        <img class="small-icon" src="favicons/repeat.png" alt="Repetir">
                     </div>
 
                 </button>
@@ -285,8 +253,8 @@
                     aria-label="Adicionar músicas"
                 >
 
-                    <div class="icone-pequeno envelope">
-                        <img class="small-icon" src="favicons/add.png" alt="Adicionar músicas">
+                    <div class="icone-pequeno envelope" aria-hidden="true">
+                        <img class="small-icon" src="favicons/adicionar musica.png" alt="Adicionar músicas" style="width: 38px; height: 38px; object-fit: contain;">
                     </div>
 
                 </button>
@@ -324,9 +292,7 @@
                     </div>
 
 
-                    <span class="florzinha">
-                        <img class="playlist-icon" src="favicons/playlist.png" alt="Playlist">
-                    </span>
+                    <span class="florzinha" aria-label="Playlist">✿</span>
 
                 </div>
 
