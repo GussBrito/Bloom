@@ -71,6 +71,12 @@ const listaMusicas =
 const playlistVazia =
     document.getElementById("playlistVazia");
 
+/* BOTOES DE FAVICONS (CANTOS) */
+const faviconTopLeft = document.querySelector('.favicon-btn.top-left');
+const faviconTopRight = document.querySelector('.favicon-btn.top-right');
+const faviconBottomLeft = document.querySelector('.favicon-btn.bottom-left');
+const faviconBottomRight = document.querySelector('.favicon-btn.bottom-right');
+
 
 /* ==========================================
    ESTADO
@@ -963,8 +969,8 @@ function renderizarPlaylist() {
                 "musica-mini-capa";
 
 
-            capa.textContent =
-                "✿";
+            // usar imagem ilustrada como mini-capa (placeholder: favicons/playlist.png)
+            capa.innerHTML = '<img src="favicons/playlist.png" alt="Capa" class="mini-capa-img">';
 
 
             const informacoes =
@@ -1155,3 +1161,9 @@ document.addEventListener(
 aplicarTema();
 
 renderizarPlaylist();
+
+/* Conectar botões dos cantos às ações do player */
+if (faviconTopLeft) faviconTopLeft.addEventListener('click', musicaAnterior);
+if (faviconTopRight) faviconTopRight.addEventListener('click', musicaProxima);
+if (faviconBottomLeft) faviconBottomLeft.addEventListener('click', () => { btnShuffle.click(); });
+if (faviconBottomRight) faviconBottomRight.addEventListener('click', () => { btnRepeat.click(); });
